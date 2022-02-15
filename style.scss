@@ -1,7 +1,9 @@
+// This is the styling sheet
 body {
   margin: 0;
   background-color: #cac8c8;
 }
+// Container style editing 
 .container{
   display: grid;
   grid-template-columns: 1fr;
@@ -10,24 +12,25 @@ body {
   'topHeader'
   'contentContainer';
   height: 100vh;
-
+// Top header styling
   .top-header {
     grid-area: topHeader;
     display: flex;
     justify-content: center;
     background-color: rgba(21, 111, 185, 0.644);
+    // Logo width setting 
     .logo{
       width: 250px;
     }
   
   }
-
+// Content container style setting
   .content-container {
     grid-area: contentContainer;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-
+// Menu style
     .menu{
       background-color: white;
       width: calc(30% - 40px);
