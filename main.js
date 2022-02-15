@@ -8,6 +8,8 @@ var markers = [];
 const input = document.querySelector('input');
 input.addEventListener('input', updateValue);
 
+
+
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution:
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -26,8 +28,13 @@ fetch("https://opensky-network.org/api/states/all")
       
     }
     addFlightinfo();
-  
+    let cards = document.querySelectorAll(".card")
     
+    cards.forEach(card => {
+      card.addEventListener("click",() => { console.log('click')})
+    
+    })
+   
   })
   .catch(error => console.log(error))
 
@@ -82,6 +89,7 @@ function updateValue(e) {
  </div>`;
  document.getElementById("info-container").innerHTML += html;
   markers.push(L.marker([f[6], f[5]], { title: f[1] }).addTo(map));
+  
   });
 }
 
