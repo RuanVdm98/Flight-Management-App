@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="./icon.png" />
+    <link rel="icon" type="image/svg+xml" href="assets/icon.png" />
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
@@ -14,12 +14,12 @@
   </head>
 
   <body>
-    <div class="container">
+    <div class="container bg-red-500">
       <div class="top-header">
-        <img class="logo" src="./logo.png" alt="logo" />
+        <img class="logo" src="assets/logo.png" alt="logo" />
       </div>
       <div class="content-container">
-        <div class="menu">
+        <div class="menu m-5 bg-red-500">
           <div class="search">
             <input
               type="text"
@@ -27,7 +27,7 @@
               placeholder="What are you looking for?"
             />
             <button type="submit" class="searchButton">
-              <img src="./search.svg" />
+              <img src="assets/search.svg" />
             </button>
           </div>
           <div class="flight-info-container" id="info-container"></div>
@@ -36,6 +36,7 @@
       </div>
     </div>
 
-    <script type="module" src="/main.js"></script>
+    <script type="module" src="/src/main.ts"></script>
+
   </body>
 </html>
