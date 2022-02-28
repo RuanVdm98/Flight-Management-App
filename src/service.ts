@@ -20,5 +20,5 @@ const flightData$ = fromFetch("https://opensky-network.org/api/states/all").pipe
 //tried to tap on the pipe and could not gte the data set the only way i could was by subscribing to the observable and then setting the local storage
 flightData$.subscribe(f => {
     window.localStorage.setItem('flights', JSON.stringify(f.states));
-    map.renderingData()
+    map.updateValue();
 });
