@@ -6,5 +6,3 @@ const inputElement =  document.querySelector("input");
 if (inputElement) {
   inputElement.addEventListener("input", map.updateValue);
 }
-
-
