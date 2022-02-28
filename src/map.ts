@@ -1,5 +1,6 @@
 import L from "leaflet";
 import {Flight} from "./models/flight";
+import {allFlights} from './main'
 
 export const map = L.map("map-container").setView([20.505, -0.09], 2);
 let markers: L.Marker[] = [];
@@ -11,28 +12,6 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
-let temp = window.localStorage.getItem('flights');
-let tempFlights = [];
-let count = 0;
-
-if (temp && temp.length > 0) {
-    tempFlights = JSON.parse(temp);
-    flights = tempFlights.filter(f => f[5] !== null && f[6] !== null).slice(0, 30).map(ff => {
-        return {
-            icoa24: ff[0],
-            longitude: parseInt(ff[5]),
-            latitude: parseInt(ff[6]),
-            date: parseInt(ff[3]),
-            altitude: parseInt(ff[13]),
-            country: ff[2],
-            velocity: parseInt(ff[9]),
-            callSign: ff[1]
-        };
-    })
-
-    addFlightinfo(flights);
-    addFlightMarkersToMap(flights);
-}
 
 export function addFlightinfo(flights: Flight[]) {
     flights.forEach((f) => {
@@ -61,6 +40,9 @@ export function addFlightMarkersToMap(flights: Flight[]) {
 }
 
 export function updateValue(e: Event | null = null) {
+    if (flights.length === 0) {
+        flights = allFlights;
+    }
     const infoContainer = document.getElementById("info-container");
     if (infoContainer) {
         infoContainer.innerHTML = "";
@@ -70,22 +52,8 @@ export function updateValue(e: Event | null = null) {
     });
     markers = [];
     const filteredFlights = e ? flights
-        .filter((f) => f.callSign.toLowerCase().includes((e.target as HTMLInputElement).value.toLowerCase())).map(f => {
-        const html = `  
-          <div class="card">
-            <div class="heading">
-              <h1 class="font-semibold">${f.callSign}</h1>
-              <label>${f.country}</label>
-            </div> 
-            <label>Updated: ${toDateTime(f.date)}</label>
-            <label>Velocity: ${f.velocity}</label>
-            <label>Altitude: ${f.altitude}m</label>
-          </div>`;
-        if (infoContainer) {
-            infoContainer.innerHTML += html;
-        }
-        return f;
-    }) : flights.map(f => {
+        .filter((f) => f.callSign.toLowerCase().includes((e.target as HTMLInputElement).value.toLowerCase())) : flights
+            .map(f => {
         const html = `  
           <div class="card">
             <div class="heading">
